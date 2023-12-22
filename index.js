@@ -41,7 +41,12 @@ app.post("/postJob", async (req, res) => {
    res.send(result);
   });
 
-
+  app.delete("/postJob/:id", async (req, res) => {
+    const id = req.params.id;
+    const query = { _id: req.params.id };
+    const result = await postJobCollection.deleteOne(query);
+    res.send(result);
+  });
 
 
 // users save to the database--
