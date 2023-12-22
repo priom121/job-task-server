@@ -27,6 +27,22 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
 //     await client.connect();
 const jobCollection = client.db("jobDB").collection("users");
+const postJobCollection = client.db("jobDB").collection("postJob");
+
+// create task biodata
+app.post("/postJob", async (req, res) => {
+  const request = req.body;
+ const result = await postJobCollection.insertOne(request);
+  res.send(result);
+ });
+                         
+  app.get("/postJob", async (req, res) => {
+   const result = await postJobCollection.find().toArray();
+   res.send(result);
+  });
+
+
+
 
 // users save to the database--
 app.post("/users", async (req, res) => {
